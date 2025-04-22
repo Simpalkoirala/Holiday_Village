@@ -21,10 +21,10 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 if(process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/Front_End/dist")));
+  app.use(express.static(path.join(__dirname, "/Front_End/build")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "Front_End", "public", "index.html"));
+    res.sendFile(path.resolve(__dirname, "Front_End", "build", "index.html"));
   })
 }
 
