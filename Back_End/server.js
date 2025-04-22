@@ -20,13 +20,13 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/Front_End/build")));
 
-app.use(express.static(path.join(__dirname, "/Front_End/build")));
-
-app.get("*", (req, res) => {
-  res.senFile(path.resolve(__dirname, "Front_End", "public", "index.html"));
-})
-
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "Front_End", "build", "index.html"));
+  })
+}
 
 // Health check route
 app.get("/", (req, res) => {
